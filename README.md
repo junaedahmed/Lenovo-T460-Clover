@@ -1,7 +1,12 @@
 # OpenCore N-D-K build is live with GUI!
 # Try it out with fresh install or preinstalled system!
+```
+This configuration is fully compatible with OpenCore official build and dual booting with Windows.
+The reason to go default with N-D-K build is to retain preinstalled Windows system compatibility.
+If you planning to fresh install then either N-D-K or Official OC can be used.
+```
 
-![Screenshot](Docs/misc/t460.png)
+![Screenshot](Docs/misc/T460.png)
 
 # macOS Catalina (Lenovo ThinkPad T460)
 
@@ -13,17 +18,18 @@
 - Display: 14" FHD (1920x1280) IPS Touch Panel
 - Sound Card: Realtek ALC293
 - Storage: 240GB Gigabyte SATA SSD
-- WLAN + Bluetooth: ~~Intel 8260 ac, 2x2 + BT4.1~~ **replaced with DW1820A
+- WLAN + Bluetooth: ~~Intel 8260 ac, 2x2 + BT4.1~~ **replaced with DW1820A**
 ```
 
 ### Patreon
 
-- If you like my work then please feel free to buy me a bear. Every little bit helps! junaed.rx@icloud.com | https://www.patreon.com/junaed
+- If you like my work then please feel free to buy me a bear. Every little bit helps!
 
+<a href="https://www.patreon.com/bePatron?u=33582929" data-patreon-widget-type="become-patron-button">Become a Patron!</a>
 
 ## General knowledge & credits
 
-- First credit goes to [tluck](https://github.com/tluck/Lenovo-T460-Clover) for making a perfect working build. This is a heavily reworked version of tluck's build as base. Support can be found from [tluck's Guide](https://www.insanelymac.com/forum/topic/315451-guide-lenovo-t460t470-macos-with-clover/?page=46&tab=comments#comment-2717200) thread on InsanelyMac.
+- First credit goes to [tluck](https://github.com/tluck/Lenovo-T460-Clover) for making a perfect working build. This is a heavily reworked version of tluck's build as base. Support can be found from [tluck's Guide](https://www.insanelymac.com/forum/topic/315451-guide-lenovo-t460t470-macos-with-clover/) thread on InsanelyMac.
 
 - Lots of SSDT patches from [OC-little](https://translate.google.it/translate?sl=zh-CN&tl=en&u=https%3A%2F%2Fgithub.com%2Fdaliansky%2FOC-little)
 
@@ -46,9 +52,9 @@
 
 Replace Intel WiFi card with a macOS natively supported card such as:
 
-- DW1820A `need patch`
-- Dw1830 `natively supported`
-- BCM94360CS2
+- DW1820A `need patch, but dart cheap`
+- Dw1830 `works out of the box`
+- BCM94360CS2 `native apple card, sidecar supported`
 
 ## BIOS Configuration Settings:
 
@@ -63,6 +69,11 @@ Replace Intel WiFi card with a macOS natively supported card such as:
 - `UEFI/Legacy Boot`: **UEFI Only**;
 - `CSM Support`: **Yes**.
 ```
+
+
+## Installing OpenCore Boot-loader & macOS Catalina:
+
+To install macOS follow the guides provided by [Dortania](https://dortania.ml/getting-started/)
 
 ## Support For Similar Hardware:
 
@@ -104,13 +115,14 @@ If you have a different CPU model, please, **remove SSDT-CPUD.aml and replace wi
 
 ### Optional
 
-#### [Generate your own SMBIOS](https://github.com/corpnewt/GenSMBIOS)
+#### Generate your own SMBIOS
+
+[GenSMBIOS](https://github.com/corpnewt/GenSMBIOS) run the script with MacbookPro13,1
 ```
-run the script with MacbookPro13,1
 add results to PlatformInfo > Generic > MLB, SystemSerialNumber and SystemUUID
 ```
 
-#### Enable macOS HiDPI
+#### Enable macOS native HiDPI
 
 with [one-key-hidpi](https://github.com/xzhih/one-key-hidpi)
 Run this command in terminal:
@@ -178,11 +190,6 @@ killall Dock
 - [ ] Sidecar Wireless `Doesn't work without apple native WIFI card`
 
 
-## Installing OpenCore Boot-loader & macOS Catalina:
-
-To install macOS follow the guides provided by [Dortania](https://dortania.ml/getting-started/)
-
-
 ## Miscellaneous Information:
 
 - Make sure your bios settings are in order, disable CompuTrace all security chips network booting turn your video men as hit as you can, disable fingerprint sensor because you won’t need it, to play around with a few other settings to get a successful boot if it doesn't work the beginning. Also make sure you enable CSM for UEFI booting because that's what you'll be using this is not a Legacy install.
@@ -192,3 +199,11 @@ To install macOS follow the guides provided by [Dortania](https://dortania.ml/ge
 - Once the install finishes go through the setup process take the contents of the install folder which will be just like you used for the USB installer instead move all those contents to the EFI directory of the Drive that used to install Mac OS on because this will be your permanent clover set up. Once you do that you should then be able to into Clover every time you start up and then go directly to your macOS. There are ways to configure it so that you can start directly in the Mac OS but you'll have to figure that out on your own.
 
 - If you decide to go with a USB Wifi dongle instead of upgrading the PCIe card then keep in mind that you will not get the full functionality you would have with an official AirPort module such as AirDrop and Location Services. I suggest using the Asus USB-53 Nano Wireless A/C dongle Because I know for a fact it works with this build and macOS Catalina in general. You'll need to install the driver and wireless utility that comes with it or dl it from Asus' website and then reboot the computer and it will work. You can even open up the computer and unscrew the 3rd USB port that's seated next to the power port on the computer and then you can just plug the USB module in and push the board back from it's seating slightly then close up the case and then you'll have wifi without that little USB module sticking out of the side of the computer all the time. I did this for a few weeks and it works great.
+
+## If you found my work useful please consider supporting me on Patreon
+
+<a href="https://www.patreon.com/bePatron?u=33582929" data-patreon-widget-type="become-patron-button">Become a Patron!</a>
+
+## Thanks to
+
+All the hackintosh community, especially you guys on Acidanthera team.

@@ -1,5 +1,5 @@
-// SSDT for T460 XHCI and custom UIAC Device
-// Automatic injection of XHC properties
+// SSDT for T460 USB custom map w/o USBInjectAll.kext
+// Automatic injection of XHCI properties
 //
 // change _UPC to XUPC (XHCI)
 // Find: X1VQQw==    Replace: WFVQQw==

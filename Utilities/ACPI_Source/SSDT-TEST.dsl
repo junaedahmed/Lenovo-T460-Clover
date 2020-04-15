@@ -11,7 +11,7 @@ DefinitionBlock("", "SSDT", 2, "ACDT", "TEST", 0)
     External (RMDT.P6, MethodObj)   // 6 Arguments
     External (RMDT.P7, MethodObj)   // 7 Arguments
     External (\_SB.PCI0.LPC.HPET._STA, MethodObj)   // 0 Argumnets
-    External (\_SB.PCI0.LPC.EC.WACH, FieldUnitObj)     // 0 Arguments
+//    External (\_SB.PCI0.LPC.EC.WACH, FieldUnitObj)     // 0 Arguments
 //    External (XXXX, IntObj)
 //    External (YYYY, IntObj)
 //    External (WNTF, IntObj)
@@ -22,8 +22,8 @@ DefinitionBlock("", "SSDT", 2, "ACDT", "TEST", 0)
     {
         \RMDT.P1 ("AAA001")
         \RMDT.P2 ("H8DR State: ", \H8DR)
-        \RMDT.P2 ("WACH State: ", \_SB.PCI0.LPC.EC.WACH)
+        // \RMDT.P2 ("WACH State: ", \_SB.PCI0.LPC.EC.WACH)
         \RMDT.P2 ("HPET Device Sate: ", \_SB.PCI0.LPC.HPET._STA ())
-	    //\RMDT.P5 ("HPET disabling variables XXXX, YYYY, WNTF, WXPF: ", \XXXX, \YYYY, \WNTF, \WXPF)
+	    // \RMDT.P5 ("HPET disabling variables XXXX, YYYY, WNTF, WXPF: ", \XXXX, \YYYY, \WNTF, \WXPF)
     }
 }

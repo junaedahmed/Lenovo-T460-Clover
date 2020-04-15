@@ -1,4 +1,4 @@
-// Adding various virtual devices for macOS compatibility
+// SSDT for various virtual devices for macOS compatibility
 
 DefinitionBlock ("", "SSDT", 2, "T460", "VDEV", 0)
 {

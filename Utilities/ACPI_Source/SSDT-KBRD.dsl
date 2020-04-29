@@ -124,13 +124,13 @@ DefinitionBlock("", "SSDT", 2, "T460", "KBRD", 0)
         {
 
             If (_OSI ("Darwin"))
-            {
-                // Send a down event for the Alt key (scancode e0 5b), then a one-shot event (down then up) for
-                // the spacebar (scancode 39), and finally an up event for the Alt key (break scancode e0 db).
+            {   // Ctrl key is mapped below as macOS Command key by VoodooPS2
+                // Send a down event for the Control key (scancode 1d), then a one-shot event (down then up) for
+                // the spacebar (scancode 39), and finally an up event for the Control key (break scancode 9d).
                 // This is picked up by VoodooPS2 and sent to macOS as the Command+Space key combo for Spotlight.
-                Notify (\_SB.PCI0.LPC.KBD, 0x0138)
+                Notify (\_SB.PCI0.LPC.KBD, 0x011d)
                 Notify (\_SB.PCI0.LPC.KBD, 0x0339)
-                Notify (\_SB.PCI0.LPC.KBD, 0x01b8)
+                Notify (\_SB.PCI0.LPC.KBD, 0x019d)
             }
             Else
             {
@@ -145,12 +145,13 @@ DefinitionBlock("", "SSDT", 2, "T460", "KBRD", 0)
 
             If (_OSI ("Darwin"))
             {
-                // Send a down event for the Control key (scancode 1d), then a one-shot event (down then up) for
-                // the up arrow key (scancode 0e 48), and finally an up event for the Control key (break scancode 9d).
+                // Win key is maped below as macOS Control key by VoodooPS2
+                // here first send a down event for the Win key (scancode e0 5b), then a one-shot event (down then up) for
+                // the up arrow key (scancode e0 48), and finally an up event for the Win key (break scancode e0 db).
                 // This is picked up by VoodooPS2 and sent to macOS as the Control+Up key combo for Mission Control.
-                Notify (\_SB.PCI0.LPC.KBD, 0x011d)
+                Notify (\_SB.PCI0.LPC.KBD, 0x025b)
                 Notify (\_SB.PCI0.LPC.KBD, 0x0448)
-                Notify (\_SB.PCI0.LPC.KBD, 0x019d)
+                Notify (\_SB.PCI0.LPC.KBD, 0x02db)
             }
             Else
             {
@@ -180,24 +181,6 @@ DefinitionBlock("", "SSDT", 2, "T460", "KBRD", 0)
     {
         If (_OSI ("Darwin"))
         {
-            // Lenovo ThinkPad T460 Configuration Load
-            // Select specific items in VoodooPS2Controller
-            Method(_DSM, 4, NotSerialized)
-            {
-                If (!Arg2)
-                {
-                    Return (Buffer (One)
-                    {
-                        0x03
-                    })
-                }
-
-                Return (Package ()
-                {
-                    "RM,oem-id", "LENOVO",
-                    "RM,oem-table-id", "T460",
-                })
-            }
 
             // Overrides for settings in the Info.plist files
             Name(RMCF, Package()
@@ -207,13 +190,30 @@ DefinitionBlock("", "SSDT", 2, "T460", "KBRD", 0)
                     "ActionSwipeLeft",  "37 d, 21 d, 21 u, 37 u",
                     "ActionSwipeRight", "37 d, 1e d, 1e u, 37 u",
                     "SleepPressTime",   "1500",
-                    "Swap command and option", ">y",
+                    // This crazy combination somehow maps
+                    // macOS < == > Keyboard
+                    // command == ctrl (for using windows like copy pase shortcut)
+                    // control == win
+                    // option  == Alt
                     "Custom PS2 Map", Package()
                     {
                         Package(Zero) { },
-                        "e038=e05b", //AltGr=Left Windows
-                        "e037=64", // PrtSc=F13,via SysPrefs->Keyboard->Shortcuts
+                        "e037=64",	// PrtSc=F13,via SysPrefs->Keyboard->Shortcuts
+                        // swaps left alt with left win, without this only "Custom ADB Map"
+                        // doesn't work, don't know why
+                        "38=e05b",
+                        "e05b=38",
                     },
+                    "Custom ADB Map", Package()
+		            {
+  		                Package(Zero){},
+  		                // Somehow setting 1d=37 makes left alt = left control and left win = option
+                        // here 38 and e05b doesn't respect this ADB map, But only setting them in
+                        // Custom PS2 Map alone doesn't work either.
+                		"38=3a",    // 38 is PS2 for left alt, 3a is ADB for left option
+                        "1d=37",    // 1d is PS2 for left control, 37 is ADB for command
+                        "e05b=3b",    // e05b is PS2 for left win, 3b is ADB for left control
+		            },
                 },
             })
         }

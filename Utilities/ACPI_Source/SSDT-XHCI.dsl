@@ -1,5 +1,5 @@
 // SSDT for T460 USB custom map w/o USBInjectAll.kext
-// Automatic injection of XHCI properties
+// And automatic injection of XHCI properties
 //
 // change _UPC to XUPC (XHCI)
 // Find: X1VQQw==    Replace: WFVQQw==
@@ -149,6 +149,7 @@ DefinitionBlock ("", "SSDT", 2, "T460", "XHCI", 0)
 
     Scope (\)
     {
+    	// Return package of _UPC for disabled port
         Name (UPCX, Package (0x04)
         {
             Zero,
@@ -157,6 +158,7 @@ DefinitionBlock ("", "SSDT", 2, "T460", "XHCI", 0)
             Zero
         })
 
+        // Return package of _UPC for external port
         Name (UPCD, Package (0x04)
         {
             0xFF,
@@ -165,6 +167,7 @@ DefinitionBlock ("", "SSDT", 2, "T460", "XHCI", 0)
             Zero
         })
 
+        // Return package of _UPC for internal port
         Name (UPCB, Package (0x04)
         {
             0xFF,

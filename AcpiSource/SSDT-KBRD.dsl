@@ -1,4 +1,5 @@
-// SSDT for T460 Keyboard Map & Configuration.
+// SSDT for T460 Keyboard Map & Configuration. Use with @MSzturc's ThinkpadAssistant app
+// for full function key support (https://github.com/MSzturc/ThinkpadAssistant/releases)
 
 DefinitionBlock("", "SSDT", 2, "T460", "KBRD", 0)
 {

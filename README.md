@@ -6,7 +6,7 @@ The reason to go default with N-D-K build is to retain preinstalled Windows syst
 If you planning to fresh install then either N-D-K or Official OC can be used.
 ```
 
-![Screenshot](Docs/misc/T460.png)
+![Screenshot](Misc/T460.png)
 
 ### Laptop's Configuration
 
@@ -119,7 +119,7 @@ Any other device will require that you make hotpatch for your own DSDT. Take a l
 
 #### USB Ports Map
 
-Custom made SSDT-XHCI.aml is used to map T460 USB ports using this [guide](https://www.olarila.com/topic/6878-guide-native-usb-fix-for-notebooks-no-injectorkext-required/).
+Custom made SSDT-XHCI.aml is used to map T460 USB ports using this guide: [Native USB fix](https://www.olarila.com/topic/6878-guide-native-usb-fix-for-notebooks-no-injectorkext-required/).
 Alternatively, USBPort.kext or SSDT-UIAC & SSDT-USBX can also be used as well. These files can be generated with [Hackintool](https://github.com/headkaze/Hackintool):
 
 ```
